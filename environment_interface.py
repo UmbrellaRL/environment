@@ -4,7 +4,7 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 
-from environment.state_space_interface import IState
+from state_space_interface import IState
 
 class IActions(ABC, Enum):
     pass
@@ -19,7 +19,7 @@ class IAction(ABC):
 class IEnvironment[SI](ABC):
 
     @abstractmethod
-    def step(self, action: IAction) -> ():
+    def step(self, action: IAction) -> IState:
         pass
 
     @abstractmethod
@@ -35,7 +35,7 @@ class IEnvironment[SI](ABC):
         pass
 
     @abstractmethod
-    def get_transition_probability(self, state_index: SI, action: A, next_state_index: SI) -> float:
+    def get_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float:
         pass
 
 class IStateTransGraph(ABC):
