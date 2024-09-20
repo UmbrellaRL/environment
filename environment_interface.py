@@ -38,5 +38,5 @@ class IEnvironment[SI](ABC):
     def get_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float:
         pass
 
-class IStateTransGraph(ABC):
+class IStateTransitionGraph(ABC):
     pass
