@@ -1,7 +1,3 @@
-# TODO Docstring
-"""_summary_
-"""
-
 from abc import ABC, abstractmethod
 from environment_interface import IAction
 
