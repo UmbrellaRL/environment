@@ -12,7 +12,7 @@ class StateSpace[SI](IStateSpace[SI]):
     def __init__(self, state_space: dict[SI, IState]) -> None:
         self._state_space: dict[SI, IState] = state_space
 
-    def get_state(self, index: SI) -> IState: self._state_space[index]
+    def get_state(self, index: SI) -> IState: return self._state_space[index]
     
     def number_of_states(self) -> int: return len(self._state_space)
 
