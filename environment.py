@@ -4,7 +4,7 @@ Environment type for a reinforcement learning problem.
 Environment type is a mapping from a State Index to the State's possible Actions.
 """
 
-from environment_interface import IActions, IAction, IStateTransGraph
+from environment_interface import IActions, IAction, IStateTransitionGraph
 from state_space_interface import IStateSpace, IState
 
 # TODO Might not need this here.
@@ -13,7 +13,7 @@ class Actions(IActions):
 
 class Action(IAction):
     # TODO Doc string.
-    """Actions available within the Environment.
+    """Action available within the Environment.
 
     Args:
         IAction (_type_): _description_
@@ -23,9 +23,9 @@ class Action(IAction):
         self.value = value
 
 class Environment[SI]:
-    def __init__(self, state_space: IStateSpace[SI], state_trans_graph: IStateTransGraph) -> None:
+    def __init__(self, state_space: IStateSpace[SI], state_transition_graph: IStateTransitionGraph) -> None:
         self._state_space: IStateSpace[SI] = state_space
-        self._state_transitions: IStateTransGraph = state_trans_graph
+        self._graph: IStateTransitionGraph = state_transition_graph
 
     def step(self, action: IAction) -> IState:
         """Perform Action in Environment.
@@ -40,11 +40,23 @@ class Environment[SI]:
         """
         pass
 
+    def get_state_space(self) -> IStateSpace[SI]: return self._state_space
+
+class StateTransititionGraph[SI](IStateTransitionGraph):
+    """State Transition Graph.
+    
+    Possible to go from State A to State B within the Environment with specific
+    Actions.
+    This graph class describes those transitions.
+    """
+    def __init__(self, state_transition_graph: dict[SI, dict[IAction, dict[SI, float]]]) -> None:
+        self._graph = state_transition_graph
+    
     def get_next_states(
         self,
-        state_index: SI,
-        action: A
-    ) -> StateProbabilityDistribution[SI]:
+        index: SI,
+        action: IAction
+    ) -> dict[SI, float]:
         """Return which States may occur following Action
         with their probabilities of occuring.
 
@@ -54,12 +66,11 @@ class Environment[SI]:
         Args:
             self (_type_): _description_
         """
-        return self.get_state_actions(current_state_index) \
-            .get_state_probability_distribution(action)
+        return self._graph[index][action]
 
     def get_state_transition_probability(
         self,
-        current_state_index: SI,
+        state_index: SI,
         action: IAction,
         next_state_index: SI
     ) -> float:
@@ -76,19 +87,4 @@ class Environment[SI]:
         Returns:
             float: Percentage probability of the next State occuring.
         """
-        
-        return self.get_state_actions(current_state_index) \
-            .get_state_probability_distribution(action) \
-                .get_state_probability(next_state_index)
-
-    def get_state_space(self) -> IStateSpace[SI]: return self._state_space
-
-class StateTransGraph(IStateTransGraph):
-    """State Transition Graph.
-    
-    Possible to go from State A to State B within the Environment with specific
-    Actions.
-    This graph class describes those transitions.
-    """
-    def __init__(self, state_transition_graph: dict[IState, dict[IAction, IState]]) -> None:
-        self._graph = state_transition_graph
+        return self._graph[state_index][action][next_state_index] 
