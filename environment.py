@@ -3,24 +3,23 @@ Environment type for a reinforcement learning problem.
 
 Environment type is a mapping from a State Index to the State's possible Actions.
 """
+from enum import Enum
+from dataclasses import dataclass
 
-from environment_interface import IActions, IAction, IStateTransitionGraph
+from environment_interface import IAction, IStateTransitionGraph
 from state_space_interface import IStateSpace, IState
 
 # TODO Might not need this here.
-class Actions(IActions):
+class Actions(Enum):
     pass
 
+@dataclass
 class Action(IAction):
     # TODO Doc string.
     """Action available within the Environment.
-
-    Args:
-        IAction (_type_): _description_
     """
-    def __init__(self, name: str, value: float) -> None:
-        self.name = name
-        self.value = value
+    name: Actions
+    value: float
 
 class Environment[SI]:
     def __init__(self, state_space: IStateSpace[SI], state_transition_graph: IStateTransitionGraph) -> None:

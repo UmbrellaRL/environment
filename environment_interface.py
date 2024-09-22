@@ -2,16 +2,13 @@
 # determine_next_state_probability_distribution method equivalent done in config tile -> injected into environment factory.
 
 from abc import ABC, abstractmethod
-from enum import Enum
+from dataclasses import dataclass
 
 from state_space_interface import IState
 
+@dataclass
 class IAction(ABC):
-    """Abstract Base Class for individual Action within the environment.
-
-    Args:
-        ABC (_type_): _description_
-    """
+    pass
 
 class IEnvironment[SI](ABC):
 
