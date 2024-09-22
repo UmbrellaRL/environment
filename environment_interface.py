@@ -6,9 +6,6 @@ from enum import Enum
 
 from state_space_interface import IState
 
-class IActions(ABC, Enum):
-    pass
-
 class IAction(ABC):
     """Abstract Base Class for individual Action within the environment.
 
