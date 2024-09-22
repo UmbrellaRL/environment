@@ -2,7 +2,7 @@
 """_summary_
 """
 
-from state_space_interface import IStateSpace, IState, IStateProbDist
+from state_space_interface import IStateSpace, IState
 from environment_interface import IAction
 
 class StateSpace[SI](IStateSpace[SI]):
