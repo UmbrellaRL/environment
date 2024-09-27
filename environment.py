@@ -21,6 +21,9 @@ class Action(IAction):
     name: Actions
     value: float
 
+@dataclass
+class EnvironmentConfig(I)
+
 class Environment[SI]:
     def __init__(self, state_space: IStateSpace[SI], state_transition_graph: IStateTransitionGraph) -> None:
         self._state_space: IStateSpace[SI] = state_space

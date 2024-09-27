@@ -3,6 +3,7 @@
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from pathlib import Path
 
 from state_space_interface import IState
 
@@ -30,6 +31,15 @@ class IEnvironment[SI](ABC):
 
     @abstractmethod
     def get_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float:
+        pass
+
+class EnvironmentConfig(ABC):
+    @abstractmethod
+    def from_json(self, path: Path) -> EnvironmentConfig:
+        pass
+
+    @abstractmethod
+    def validate(self) -> None:
         pass
 
 class IStateTransitionGraph(ABC):
