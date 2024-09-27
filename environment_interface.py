@@ -2,19 +2,14 @@
 # determine_next_state_probability_distribution method equivalent done in config tile -> injected into environment factory.
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from pathlib import Path
-
 from state_space_interface import IState
 
-@dataclass
 class IAction(ABC):
     pass
 
 class IActions(ABC):
-    @classmethod
     @abstractmethod
-    def actions(cls) -> list[IAction]: pass
+    def actions(self) -> list[str]: pass
 
 class IEnvironment[SI](ABC):
 
@@ -33,12 +28,12 @@ class IEnvironment[SI](ABC):
     @abstractmethod
     def get_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float: pass
 
-class EnvironmentConfig(ABC):
-    @abstractmethod
-    def from_json(self, path: Path) -> EnvironmentConfig: pass
+# class EnvironmentConfig(ABC):
+#     @abstractmethod
+#     def from_json(self, path: Path) -> EnvironmentConfig: pass
 
-    @abstractmethod
-    def validate(self) -> None: pass
+#     @abstractmethod
+#     def validate(self) -> None: pass
 
 class IStateTransitionGraph(ABC):
     pass
