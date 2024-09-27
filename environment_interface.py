@@ -11,36 +11,34 @@ from state_space_interface import IState
 class IAction(ABC):
     pass
 
+class IActions(ABC):
+    @classmethod
+    @abstractmethod
+    def actions(cls) -> list[IAction]: pass
+
 class IEnvironment[SI](ABC):
 
     @abstractmethod
-    def step(self, action: IAction) -> IState:
-        pass
+    def step(self, action: IAction) -> IState: pass
 
     @abstractmethod
-    def render(self) -> None:
-        pass
+    def render(self) -> None: pass
 
     @abstractmethod
-    def get_state(self, state_index: SI) -> IState:
-        pass
+    def get_state(self, state_index: SI) -> IState: pass
 
     @abstractmethod
-    def get_next_states(self, state_index: SI, action: IAction) -> list[SI]:
-        pass
+    def get_next_states(self, state_index: SI, action: IAction) -> list[SI]: pass
 
     @abstractmethod
-    def get_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float:
-        pass
+    def get_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float: pass
 
 class EnvironmentConfig(ABC):
     @abstractmethod
-    def from_json(self, path: Path) -> EnvironmentConfig:
-        pass
+    def from_json(self, path: Path) -> EnvironmentConfig: pass
 
     @abstractmethod
-    def validate(self) -> None:
-        pass
+    def validate(self) -> None: pass
 
 class IStateTransitionGraph(ABC):
     pass

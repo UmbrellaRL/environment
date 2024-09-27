@@ -6,20 +6,21 @@ Environment type is a mapping from a State Index to the State's possible Actions
 from enum import Enum
 from dataclasses import dataclass
 
-from environment_interface import IAction, IStateTransitionGraph
+from environment_interface import IAction, IActions, IStateTransitionGraph
 from state_space_interface import IStateSpace, IState
 
-# TODO Might not need this here.
 class Actions(Enum):
     pass
 
 @dataclass
 class Action(IAction):
-    # TODO Doc string.
-    """Action available within the Environment.
-    """
+    """Action available within the Environment."""
     name: Actions
     value: float
+
+class Actions(IActions):
+    """Collection of Actions available within the Environment."""
+    def actions(cls) -> list[IAction]: [member.value for member in cls]
 
 @dataclass
 class EnvironmentConfig(I)
