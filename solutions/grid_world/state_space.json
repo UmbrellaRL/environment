@@ -1,0 +1,101 @@
+{
+    "state_space": 
+    {
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        },
+        "(0, 1)":
+        {
+            "actions": [],
+            "reward": 0,
+            "is_terminal": "False"
+        }
+    }
+}
