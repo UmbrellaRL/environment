@@ -1,7 +1,7 @@
 {
     "state_space": 
     {
-        "(0, 1)":
+        "(0, 0)":
         {
             "actions": [],
             "reward": 0,
@@ -13,85 +13,85 @@
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(0, 2)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(0, 3)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(1, 0)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(1, 1)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(1, 2)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(1, 3)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(2, 0)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(2, 1)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(2, 2)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(2, 3)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(3, 0)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(3, 1)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(3, 2)":
         {
             "actions": [],
             "reward": 0,
             "is_terminal": "False"
         },
-        "(0, 1)":
+        "(3, 3)":
         {
             "actions": [],
             "reward": 0,
