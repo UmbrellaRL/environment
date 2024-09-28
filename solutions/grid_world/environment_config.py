@@ -2,9 +2,6 @@
 
 from enum import Enum
 
-from environment import Actions
-from environment_interface import IActions
-
 class GridWorldActions(Enum):
     """Grid World Actions."""
     UP = "Up"
