@@ -3,12 +3,13 @@ Environment type for a reinforcement learning problem.
 
 Environment type is a mapping from a State Index to the State's possible Actions.
 """
-import json
-
 from dataclasses import dataclass
+from pathlib import Path
 
-from environment_interface import IAction, IActions, IStateTransitionGraph
+from environment_interface import IAction, IActions, IEnvironmentConfig, IStateTransitionGraph
 from state_space_interface import IStateSpace, IState
+
+from umbrellarl_utils import file_utils
 
 @dataclass
 class Action(IAction):
@@ -23,11 +24,11 @@ class Actions(IActions):
 
     def actions(self) -> list[Action]: [member for member in self._actions]
 
-
 class Environment[SI]:
-    def __init__(self, state_space: IStateSpace[SI], state_transition_graph: IStateTransitionGraph) -> None:
+    def __init__(self, state_space: IStateSpace[SI], state_transition_graph: IStateTransitionGraph, actions: IActions) -> None:
         self._state_space: IStateSpace[SI] = state_space
         self._graph: IStateTransitionGraph = state_transition_graph
+        self._actions: IActions = actions
 
     def step(self, action: IAction) -> IState:
         """Perform Action in Environment.
@@ -44,28 +45,25 @@ class Environment[SI]:
 
     def get_state_space(self) -> IStateSpace[SI]: return self._state_space
 
-@dataclass
-class EnvironmentConfig(I):
+class EnvironmentConfig[SI](IEnvironmentConfig):
     """Config class for Environment."""
-    states: dict[str, IState]
-    actions: dict[str, IAction]
+    def __init__(
+        self,
+        states_path: Path,
+        actions_path: Path,
+        transitions_path: Path
+    ) -> None:
+        self.states: dict[SI, IState] = file_utils.read_json(path=states_path)
+        self.actions: dict[str, IAction] = file_utils.read_json(path=actions_path)
+        self.transitions: dict[SI, dict[str, SI]] = file_utils.read_json(path=transitions_path)
 
-    # TODO Move to utils module.
-    @classmethod
-    def from_json(cls, path: Path) -> 'EnvironmentConfig':
-        """Load environment config from JSON file at provided path."""
-        try:
-            with path.open(mode="r", encoding="utf-8") as f:
-                data = json.load(f)
-                return data
-        except json.JSONDecodeError:
-            print(f"Error: The file {path} does not contain valid JSON.")
-        except FileNotFoundError:
-            print(f"Error: The file {path} was not found.")
-        except PermissionError:
-            print(f"Error: Permission denied for reading the file {path}.")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}.")
+    def validate(self) -> bool:
+        """Validate Environment config data."""
+        # Ensure State Actions are part of Environment Actions.
+        for state_index in self.states:
+            for state_action in state_index.actions:
+                if state_action not in self.actions:
+                    raise ValueError(f"State-Action {state_action} of State Index {state_index} not found in Environment Actions: {self.actions}.")
 
 class StateTransititionGraph[SI](IStateTransitionGraph):
     """State Transition Graph.
