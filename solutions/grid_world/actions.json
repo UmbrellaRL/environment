@@ -1,0 +1,8 @@
+{
+    "actions": [
+        "Up",
+        "Down",
+        "Left",
+        "Right"
+    ]
+}
