@@ -3,6 +3,8 @@ Environment type for a reinforcement learning problem.
 
 Environment type is a mapping from a State Index to the State's possible Actions.
 """
+import json
+
 from dataclasses import dataclass
 
 from environment_interface import IAction, IActions, IStateTransitionGraph
@@ -21,9 +23,6 @@ class Actions(IActions):
 
     def actions(self) -> list[Action]: [member for member in self._actions]
 
-# @dataclass
-# class EnvironmentConfig(I):
-#     pass
 
 class Environment[SI]:
     def __init__(self, state_space: IStateSpace[SI], state_transition_graph: IStateTransitionGraph) -> None:
@@ -45,16 +44,39 @@ class Environment[SI]:
 
     def get_state_space(self) -> IStateSpace[SI]: return self._state_space
 
+@dataclass
+class EnvironmentConfig(I):
+    """Config class for Environment."""
+    states: dict[str, IState]
+    actions: dict[str, IAction]
+
+    # TODO Move to utils module.
+    @classmethod
+    def from_json(cls, path: Path) -> 'EnvironmentConfig':
+        """Load environment config from JSON file at provided path."""
+        try:
+            with path.open(mode="r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data
+        except json.JSONDecodeError:
+            print(f"Error: The file {path} does not contain valid JSON.")
+        except FileNotFoundError:
+            print(f"Error: The file {path} was not found.")
+        except PermissionError:
+            print(f"Error: Permission denied for reading the file {path}.")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}.")
+
 class StateTransititionGraph[SI](IStateTransitionGraph):
     """State Transition Graph.
-    
+
     Possible to go from State A to State B within the Environment with specific
     Actions.
     This graph class describes those transitions.
     """
     def __init__(self, state_transition_graph: dict[SI, dict[IAction, dict[SI, float]]]) -> None:
         self._graph = state_transition_graph
-    
+
     def get_next_states(
         self,
         index: SI,
@@ -77,17 +99,17 @@ class StateTransititionGraph[SI](IStateTransitionGraph):
         action: IAction,
         next_state_index: SI
     ) -> float:
-        """Return the probability of successfully transitioning from one State 
+        """Return the probability of successfully transitioning from one State
         to another State after following an Action within the Environment.
 
         Args:
-            current_state_index (SI): State Index of the current State the 
+            current_state_index (SI): State Index of the current State the
             Agent is making an Action within.
             action (A): Action being made by the Agent.
-            next_state_index (SI): State Index of the next State the Agent will 
+            next_state_index (SI): State Index of the next State the Agent will
             be in after following Action.
 
         Returns:
             float: Percentage probability of the next State occuring.
         """
-        return self._graph[state_index][action][next_state_index] 
+        return self._graph[state_index][action][next_state_index]
