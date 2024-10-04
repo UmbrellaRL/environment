@@ -6,7 +6,13 @@ Environment type is a mapping from a State Index to the State's possible Actions
 from dataclasses import dataclass
 from pathlib import Path
 
-from environment_interface import IAction, IActions, IEnvironmentConfig, IStateTransitionGraph
+from environment_interface import (
+    IAction,
+    IActions,
+    IEnvironment,
+    IEnvironmentConfig,
+    IStateTransitionGraph
+)
 from state_space_interface import IStateSpace, IState
 
 from umbrellarl_utils import file_utils
@@ -24,7 +30,7 @@ class Actions(IActions):
 
     def actions(self) -> list[Action]: [member for member in self._actions]
 
-class Environment[SI]:
+class Environment[SI](IEnvironment):
     def __init__(self, state_space: IStateSpace[SI], state_transition_graph: IStateTransitionGraph, actions: IActions) -> None:
         self._state_space: IStateSpace[SI] = state_space
         self._graph: IStateTransitionGraph = state_transition_graph
@@ -44,6 +50,22 @@ class Environment[SI]:
         pass
 
     def get_state_space(self) -> IStateSpace[SI]: return self._state_space
+
+class EnvironmentFactory(object):
+    """Factory class for creating Environments."""
+    @staticmethod
+    def create_enviornment(actions_config: Path, states_config: Path, transitions_config: Path) -> IEnvironment:
+        """Create an environment using the provided config.
+
+        Args:
+            actions_config (Path): Path to config file for Environment Actions.
+            states_config (Path): Path to config file for Environment States.
+            transition_config (Path): Path to config file for Environment Transitions.
+
+        Returns:
+            IEnvironment: Environment instance of provided config.:w
+        """
+        pass
 
 class EnvironmentConfig[SI](IEnvironmentConfig):
     """Config class for Environment."""
