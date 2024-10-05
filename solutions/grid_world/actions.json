@@ -1,6 +1,14 @@
-[
-    "Up",
-    "Down",
-    "Left",
-    "Right"
-]
+{
+    "Up": {
+        "value": 0
+    },
+    "Down": {
+        "value": 0
+    },
+    "Left": {
+        "value": 0
+    },
+    "Right": {
+        "value": 0
+    }
+}
