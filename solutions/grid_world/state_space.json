@@ -1,84 +1,98 @@
 {
-    "state_space": {
-        "(0, 0)": {
-            "actions": ["Down", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(0, 1)": {
-            "actions": ["Down", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(0, 2)": {
-            "actions": ["Down", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(0, 3)": {
-            "actions": ["Down", "Left"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(1, 0)": {
-            "actions": ["Up", "Down", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(1, 1)": {
-            "actions": ["Up", "Down", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(1, 2)": {
-            "actions": ["Up", "Down", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(1, 3)": {
-            "actions": ["Up", "Down", "Left"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(2, 0)": {
-            "actions": ["Up", "Down", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(2, 1)": {
-            "actions": ["Up", "Down", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(2, 2)": {
-            "actions": ["Up", "Down", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(2, 3)": {
-            "actions": ["Up", "Down", "Left"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(3, 0)": {
-            "actions": ["Up", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(3, 1)": {
-            "actions": ["Up", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(3, 2)": {
-            "actions": ["Up", "Left", "Right"],
-            "reward": 0,
-            "is_terminal": "False"
-        },
-        "(3, 3)": {
-            "actions": ["Up", "Left"],
-            "reward": 0,
-            "is_terminal": "False"
-        }
+    "(0, 0)": {
+        "actions": ["Down", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(0, 1)": {
+        "actions": ["Down", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(0, 2)": {
+        "actions": ["Down", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(0, 3)": {
+        "actions": ["Down", "Left"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(1, 0)": {
+        "actions": ["Up", "Down", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(1, 1)": {
+        "actions": ["Up", "Down", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(1, 2)": {
+        "actions": ["Up", "Down", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(1, 3)": {
+        "actions": ["Up", "Down", "Left"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(2, 0)": {
+        "actions": ["Up", "Down", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(2, 1)": {
+        "actions": ["Up", "Down", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(2, 2)": {
+        "actions": ["Up", "Down", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(2, 3)": {
+        "actions": ["Up", "Down", "Left"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(3, 0)": {
+        "actions": ["Up", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(3, 1)": {
+        "actions": ["Up", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(3, 2)": {
+        "actions": ["Up", "Left", "Right"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
+    },
+    "(3, 3)": {
+        "actions": ["Up", "Left"],
+        "value": 0,
+        "reward": 0,
+        "is_terminal": "False"
     }
 }

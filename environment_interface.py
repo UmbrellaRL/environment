@@ -37,5 +37,9 @@ class IEnvironmentConfig(ABC):
     @abstractmethod
     def validate(self) -> None: pass
 
-class IStateTransitionGraph(ABC):
-    pass
+class IStateTransitionGraph[SI](ABC):
+    @abstractmethod
+    def get_next_states(self, index: SI, action: IAction) -> dict[SI, float]: pass
+
+    @abstractmethod
+    def get_state_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float: pass
