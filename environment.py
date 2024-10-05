@@ -14,14 +14,19 @@ from environment_interface import (
     IStateTransitionGraph
 )
 from state_space_interface import IStateSpace, IState
+from state_space import State
 
 from umbrellarl_utils import file_utils
 
 @dataclass
 class Action(IAction):
-    """Action available within the Environment."""
+    """
+    Action available within the Environment.
+
+    Action does not have a value. Agent associates a value with an action. The
+    Environment does not. It only knows Actions available to it.
+    """
     name: str
-    value: float
 
 class Actions(IActions):
     """Collection of Actions available within the Environment."""
@@ -49,12 +54,21 @@ class Environment[SI](IEnvironment):
         """
         pass
 
+    def get_state(self, state_index: SI) -> IState:
+        return self._state_space.get_state(index=state_index)
+
+    def get_next_states(self, state_index: SI, action: IAction) -> list[SI]:
+        return self._graph.get_next_states(index=state_index, action=action)
+
+    def get_transition_probability(self, state_index: SI, action: IAction, next_state_index: SI) -> float:
+        return self._graph.get_state_transition_probability(state_index=state_index, action=action, next_state_index=next_state_index)
+
     def get_state_space(self) -> IStateSpace[SI]: return self._state_space
 
-class EnvironmentFactory(object):
+class EnvironmentFactory[SI]:
     """Factory class for creating Environments."""
     @staticmethod
-    def create_enviornment(actions_config: Path, states_config: Path, transitions_config: Path) -> IEnvironment:
+    def create_enviornment(states_config: Path, actions_config: Path, transitions_config: Path) -> IEnvironment:
         """Create an environment using the provided config.
 
         Args:
@@ -65,7 +79,48 @@ class EnvironmentFactory(object):
         Returns:
             IEnvironment: Environment instance of provided config.:w
         """
-        pass
+        # Get objects from config files.
+        states_config = file_utils.read_json(path=states_config)
+        actions_config = file_utils.read_json(path=actions_config)
+        transitions_config = file_utils.read_json(path=transitions_config)
+
+        # Create Environment Actions from action config file.
+        actions: list[IAction] = []
+        for action in actions_config:
+            actions.append(Action(name=action))
+
+        # Create StateSpace from the state_space config file.
+        # TODO validation for Actions in States being available to the Env.
+        state_space: dict[SI, IState] = {}
+        for state_index in states_config:
+            state_config = states_config[state_index]
+            state_space[state_index] = (
+                State(
+                    actions=state_config["actions"],
+                    value=state_config["value"],
+                    reward=state_config["reward"],
+                    is_terminal=state_config["is_terminal"]
+                )
+            )
+
+        # Create Transitions from state_transitions config file.
+        # TODO Validation for Actions & States in transition.config being available to the Env.
+        transitions: dict[SI, dict[IAction, dict[SI, float]]] = {}
+        for state_idx in transitions_config:
+            state_transitions = transitions_config[state_idx]
+            transitions[state_idx] = {}
+            for action in state_transitions:
+                next_state_dist = state_transitions[action]
+                transitions[state_idx][action] = {}
+                for next_state_idx in next_state_dist:
+                    next_state_prob = next_state_dist[next_state_idx]
+                    transitions[state_idx][action][next_state_idx] = next_state_prob
+
+        return Environment(
+            state_space=state_space,
+            state_transition_graph=transitions,
+            actions=actions
+        )
 
 class EnvironmentConfig[SI](IEnvironmentConfig):
     """Config class for Environment."""
