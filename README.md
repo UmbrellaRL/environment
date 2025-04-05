@@ -28,7 +28,6 @@ When determining state value function.
  2. Persist environment state.
 
 ## Data Model
---- describe labels, relationships & properties.
 
 State (Node)
 Label: _state_index_
@@ -44,3 +43,6 @@ Properties:
 
 ![Data Model visual](https://raw.githubusercontent.com/UmbrellaRL/environment/refs/heads/dev/data_model_visual.png)
 
+## Instance Model
+4x4 Grid World example used from 'Introduction to Reinforcement Learning'.
+![Instance Model visual](https://raw.githubusercontent.com/UmbrellaRL/environment/refs/heads/dev/instance_model_visual.png)
