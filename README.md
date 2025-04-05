@@ -17,15 +17,15 @@
 Agent looking for possible actions in a state.
 When determining state value function.
 
-### Agree upon the use cases for the application.
+### Agree & rank the use cases for the application.
 
- - Persist environment state.
- - Return state properties.
-
-### Rank the importance of the use cases.
-
- 1. Return state properties.
- 2. Persist environment state.
+1. What states are connected to state x?
+2. What actions can state x take?
+3. What is the probability of getting to state x from state y?
+4. What is the reward of state x?
+5. What is the estimated value of state x?
+6. Is state x a terminal state?
+7. How far is state x from state y?
 
 ## Data Model
 
@@ -45,4 +45,6 @@ Properties:
 
 ## Instance Model
 4x4 Grid World example used from 'Introduction to Reinforcement Learning'.
+
+Start state is coloured green & end state is coloured blue.
 ![Instance Model visual](https://raw.githubusercontent.com/UmbrellaRL/environment/refs/heads/dev/instance_model_visual.png)
