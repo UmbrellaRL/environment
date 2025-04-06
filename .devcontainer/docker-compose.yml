@@ -1,0 +1,27 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    volumes:
+      - ../../:/workspaces:cached
+    environment:
+      - NEO4J_HOST=neo4j
+      - NEO4J_PORT=7687
+      - NEO4J_AUTH=neo4j/password
+  
+  neo4j:
+    image: neo4j:latest
+    volumes:
+        - neo4j_data:/data
+    environment:
+        - NEO4J_AUTH=neo4j/password
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+
+volumes:
+  neo4j_data:
+    driver: local
+
