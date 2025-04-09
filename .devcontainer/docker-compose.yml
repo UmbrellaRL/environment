@@ -1,8 +1,9 @@
 services:
   devcontainer:
+    container_name: devcontainer
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
     volumes:
       - ../../:/workspaces:cached
     environment:
@@ -13,6 +14,7 @@ services:
   
   neo4j:
     image: neo4j:latest
+    container_name: neo4j
     volumes:
         - neo4j_data:/data
     environment:

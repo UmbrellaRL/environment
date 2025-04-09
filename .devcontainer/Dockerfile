@@ -4,3 +4,5 @@
 FROM mcr.microsoft.com/devcontainers/base:debian
 
 WORKDIR /app
+
+COPY main.go /app
