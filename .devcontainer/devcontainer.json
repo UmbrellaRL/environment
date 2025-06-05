@@ -29,7 +29,9 @@
 	
 	"customizations": {
 		"vscode": {
-			"settings": {},
+			"settings": {
+				"python.analysis.typeCheckingMode": "strict"
+			},
 			"extensions": [
 				"ms-python.python",
 				"charliemarsh.ruff"
