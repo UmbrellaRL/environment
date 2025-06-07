@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+import uuid
 
 class State(BaseModel):
-    index: int
-    estimated_return: float
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     reward: float
-    is_terminal: bool
+    is_terminal: bool = False
