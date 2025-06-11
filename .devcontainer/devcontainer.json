@@ -17,7 +17,7 @@
 		7687
 	],
 
-	"postCreateCommand": "python --version && poetry env use $(which python) && poetry config virtualenvs.in-project true && poetry lock && poetry install",
+	"postCreateCommand": "python --version && poetry env use $(which python) && poetry config virtualenvs.in-project true && poetry lock && poetry install --with dev",
 	
 	"customizations": {
 		"vscode": {
