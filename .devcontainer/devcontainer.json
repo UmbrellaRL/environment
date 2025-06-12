@@ -1,31 +1,23 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
 {
 	"name": "Python URL Development",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	
-	// Removed as ssh agent forwarding is not working with docker-compose.
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "devcontainer",
-
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	"features": {
-		"ghcr.io/devcontainers-extra/features/poetry:2": {}
+	"build": {
+		"dockerfile": "Dockerfile"
 	},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"features": {
+		"ghcr.io/devcontainers-extra/features/poetry:2": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+
 	"forwardPorts": [
 		7474,
 		7687
 	],
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "python --version && poetry env use $(which python) && poetry config virtualenvs.in-project true && poetry lock && poetry install",
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"postCreateCommand": "python --version && poetry env use $(which python) && poetry config virtualenvs.in-project true && poetry lock && poetry install --with dev",
 	
 	"customizations": {
 		"vscode": {
